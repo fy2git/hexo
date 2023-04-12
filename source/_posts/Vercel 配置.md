@@ -4,7 +4,7 @@ categories: []
 date: '2023-04-12 09:16:33'
 tags: []
 title: title
-updated: Wed, 12 Apr 2023 01:16:35 GMT
+updated: Wed, 12 Apr 2023 01:20:09 GMT
 ---
 # Vercel 配置
 
@@ -16,7 +16,7 @@ updated: Wed, 12 Apr 2023 01:16:35 GMT
 xxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-### PROJECT\_ID [#](https://www.oplog.cn/qexo/configs/vercel.html#project-id)
+### PROJECT\_ID
 
 您 Qexo 部署所在项目的 ID 位于 Project Settings -> General -> Project ID
 

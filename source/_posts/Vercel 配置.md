@@ -3,11 +3,9 @@ abbrlink: ''
 categories: []
 date: '2023-04-12 09:16:33'
 tags: []
-title: title
+title: Vercel 配置
 updated: Wed, 12 Apr 2023 01:20:09 GMT
 ---
-# Vercel 配置
-
 ### VERCEL\_TOKEN
 
 您的 Vercel 账户密钥 在 [此处](https://vercel.com/account/tokens) 生成

@@ -3,7 +3,8 @@ abbrlink: ''
 categories:
 - - 技巧
 date: '2023-04-14T10:58:18.067276+08:00'
-tags: []
+tags:
+- PS
 title: 用PS怎样把图片的白色背景变为透明
 updated: 2023-4-14T11:0:19.430+8:0
 ---

@@ -1,10 +1,12 @@
 ---
 abbrlink: ''
-categories: []
+categories:
+- - 技巧
 date: '2023-04-20 17:43:17'
-tags: []
+tags:
+- debian
 title: 在Debian 9上安装和使用Docker
-updated: Thu, 20 Apr 2023 09:43:18 GMT
+updated: Thu, 20 Apr 2023 10:20:30 GMT
 ---
 ## **介绍**
 
@@ -380,7 +382,7 @@ docker ps
 您将看到类似于以下内容的输出：
 
 ```javascript
-CONTAINER ID        IMAGE               COMMAND             CREATED           
+CONTAINER ID        IMAGE               COMMAND             CREATED         
 ```
 
 在本教程中，您启动了两个容器; 一个来自`hello-world`图像，另一个来自`ubuntu`图像。两个容器都不再运行，但它们仍然存在于您的系统上。

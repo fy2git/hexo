@@ -1,10 +1,12 @@
 ---
 abbrlink: ''
-categories: []
+categories:
+- - 技巧
 date: '2023-04-20 17:44:55'
-tags: []
+tags:
+- debian
 title: 在Debian 9上安装Docker Compose
-updated: Thu, 20 Apr 2023 09:44:56 GMT
+updated: Thu, 20 Apr 2023 10:19:28 GMT
 ---
 ## **介绍**
 

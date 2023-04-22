@@ -1,10 +1,12 @@
 ---
 abbrlink: ''
-categories: []
+categories:
+- - 教程
 date: '2023-04-22 15:06:23'
-tags: []
+tags:
+- git
 title: git项目
-updated: Sat, 22 Apr 2023 07:06:24 GMT
+updated: Sat, 22 Apr 2023 07:15:29 GMT
 ---
 * https://github.com/ClassmateLin/free-chatgpt
 
@@ -91,7 +93,6 @@ curl --silent --location --request POST 'http://127.0.0.1:8080/api' \
 * openai:text-davinci-003
 
 **默认使用openai:gpt-3.5-turbo**
-
 
 * https://github.com/pengzhile/pandora
 
@@ -245,6 +246,7 @@ curl --silent --location --request POST 'http://127.0.0.1:8080/api' \
 * 你需要一个`Cloudflare`账号，如果没有，可以[注册](https://dash.cloudflare.com/sign-up)一个。
 * 登录后，点击`Workers`，然后点击`Create a Worker`，填入服务名称后点击`创建服务`。
 * 点开你刚才创建的服务，点击`快速编辑`按钮，贴入下面的代码，然后点击`保存并部署`。
+
   ```js
   export default {
     async fetch(request, env) {
@@ -256,8 +258,6 @@ curl --silent --location --request POST 'http://127.0.0.1:8080/api' \
   ```
 * 点击`触发器`选项卡，可以添加自定义访问域名。
 * 参考`高阶设置`中的环境变量使用你的服务地址进行替换。
-
-
 * https://github.com/linweiyuan/go-chatgpt-api
 
 # go-chatgpt-api

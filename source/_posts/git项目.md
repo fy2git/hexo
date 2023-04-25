@@ -6,7 +6,7 @@ date: '2023-04-22 15:06:23'
 tags:
 - git
 title: git项目
-updated: Sat, 22 Apr 2023 07:15:29 GMT
+updated: Tue, 25 Apr 2023 03:09:16 GMT
 ---
 * https://github.com/ClassmateLin/free-chatgpt
 
@@ -354,3 +354,71 @@ services:
 ```
 
 ---
+
+* https://github.com/its-star-boi/ngrok-rdp
+
+## Description
+
+**What is RDP?**
+
+* RDP (Remote Desktop Protocol) is a network communications protocol  developed by Microsoft, which allows users to connect to another  computer from a remote location.
+
+**How long does this RDP stay active?**
+
+* This RDP stays active for up to 6 hours.
+
+## 
+
+## How to use it?
+
+#### 
+
+#### HOW TO USE:
+
+[![](https://camo.githubusercontent.com/71ae14a5a69ce27294d86c77f968d8bad5dceae51139924708529a9a866c7589/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f486f77253230746f2532305573652d626c756576696f6c65743f7374796c653d666f722d7468652d6261646765266c6f676f3d6170707665796f72)](https://youtu.be/ZTSch-kF1xY)
+
+#### 
+
+#### First Step
+
+1. Press the **fork** button
+2. Login or signup to ngrok: [https://ngrok.com](https://ngrok.com)
+3. Now visit here for token: [https://dashboard.ngrok.com/auth/your-authtoken](https://dashboard.ngrok.com/auth/your-authtoken)
+
+> You'll get token from here. It'll be needed to the next step.
+
+#### 
+
+#### Second Step
+
+1. In your forked repo: **Go to Settings > Secrets > Action > New Repository Secret**
+2. In the name section, enter this text: **NGROK\_AUTH\_TOKEN**
+3. In the value section, enter the **ngrok token**
+4. Then press **Add Secret**
+5. Now go to **Action > AWS (Left Menu) > Run Workflow**
+6. Refresh the page and go to **AWS > build** option
+7. You'll get IP, Username & Password from **Connect to RDP** section.
+
+#### 
+
+#### Third Step
+
+1. Search **Remote Desktop Connection** from Windows Start Menu and open.
+2. Put IP without **tcp://** and enter Username & click **Connect**.
+3. Later on, put the password for credential/auth.
+
+[![ss](https://camo.githubusercontent.com/2ac3c0f7bc72a759b393df482f5996eedd185ac6cd269c71c7c13fc685e739e4/68747470733a2f2f692e696d6775722e636f6d2f575172394e31412e706e67)](https://camo.githubusercontent.com/2ac3c0f7bc72a759b393df482f5996eedd185ac6cd269c71c7c13fc685e739e4/68747470733a2f2f692e696d6775722e636f6d2f575172394e31412e706e67)
+
+## 
+
+## Screenshots
+
+[![ss](https://camo.githubusercontent.com/1ca60d0059d7d06d59bcfc63845076b6c031ff1938b7bf8611c7cc19a13bae76/68747470733a2f2f692e696d6775722e636f6d2f766744326f776b2e706e67)](https://camo.githubusercontent.com/1ca60d0059d7d06d59bcfc63845076b6c031ff1938b7bf8611c7cc19a13bae76/68747470733a2f2f692e696d6775722e636f6d2f766744326f776b2e706e67)
+
+[![ss](https://camo.githubusercontent.com/ed219f3edfa7a54bbf38ca33e58e8b7207b824ee56f7825ac7279381a4bfabe7/68747470733a2f2f692e696d6775722e636f6d2f3858424c5571662e706e67)](https://camo.githubusercontent.com/ed219f3edfa7a54bbf38ca33e58e8b7207b824ee56f7825ac7279381a4bfabe7/68747470733a2f2f692e696d6775722e636f6d2f3858424c5571662e706e67)
+
+## 
+
+## License
+
+The content of this project itself is licensed under the [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/), and the underlying source code used to format and display that content is licensed under the [MIT License](https://github.com/its-star-boi/ngrok-rdp/blob/main/LICENSE).

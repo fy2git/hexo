@@ -6,7 +6,7 @@ date: '2023-04-22 15:06:23'
 tags:
 - git
 title: git项目
-updated: Tue, 25 Apr 2023 03:09:16 GMT
+updated: Thu, 27 Apr 2023 06:48:23 GMT
 ---
 * https://github.com/ClassmateLin/free-chatgpt
 
@@ -422,3 +422,201 @@ services:
 ## License
 
 The content of this project itself is licensed under the [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/), and the underlying source code used to format and display that content is licensed under the [MIT License](https://github.com/its-star-boi/ngrok-rdp/blob/main/LICENSE).
+
+
+* https://github.com/fscarmen2/Argo-Nezha-Service-Container
+
+# Argo-Nezha-Service-Container
+
+
+## 准备需要用的变量
+
+* 通过 Cloudflare Json 生成网轻松获取 Argo 隧道信息: [https://fscarmen.cloudflare.now.cc](https://fscarmen.cloudflare.now.cc/)
+
+[![image](https://user-images.githubusercontent.com/92626977/231084930-02e3c2de-c52b-420d-b39c-9f135d040b3b.png)](https://user-images.githubusercontent.com/92626977/231084930-02e3c2de-c52b-420d-b39c-9f135d040b3b.png)
+
+* 到 Cloudflare 官方，在相应的域名 `DNS` 记录里加上客户端上报数据(tcp)和 ssh（可选）的域名，打开橙色云启用 CDN
+
+[![image](https://user-images.githubusercontent.com/92626977/231087110-85ddab87-076b-45c9-97d1-c8b051dcb5b0.png)](https://user-images.githubusercontent.com/92626977/231087110-85ddab87-076b-45c9-97d1-c8b051dcb5b0.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/231087714-e5a45eb9-bc47-4c38-8f5b-a4a9fb492d0d.png)](https://user-images.githubusercontent.com/92626977/231087714-e5a45eb9-bc47-4c38-8f5b-a4a9fb492d0d.png)
+
+* 到 Cloudflare 官方，选择使用的域名，打开 `网络` 选项将 `gRPC` 开关打开
+
+[![image](https://user-images.githubusercontent.com/92626977/233138703-faab8596-a64a-40bb-afe6-52711489fbcf.png)](https://user-images.githubusercontent.com/92626977/233138703-faab8596-a64a-40bb-afe6-52711489fbcf.png)
+
+* 获取 github 认证授权: [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+
+面板域名加上 `https://` 开头，回调地址再加上 `/oauth2/callback` 结尾
+
+[![image](https://user-images.githubusercontent.com/92626977/231099071-b6676f2f-6c7b-4e2f-8411-c134143cab24.png)](https://user-images.githubusercontent.com/92626977/231099071-b6676f2f-6c7b-4e2f-8411-c134143cab24.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/231086319-1b625dc6-713b-4a62-80b1-cc5b2b7ef3ca.png)](https://user-images.githubusercontent.com/92626977/231086319-1b625dc6-713b-4a62-80b1-cc5b2b7ef3ca.png)
+
+* 获取 github 的 PAT (Personal Access Token): [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new)
+
+[![image](https://user-images.githubusercontent.com/92626977/233346036-60819f98-c89a-4cef-b134-0d47c5cc333d.png)](https://user-images.githubusercontent.com/92626977/233346036-60819f98-c89a-4cef-b134-0d47c5cc333d.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/233346508-273c422e-05c3-4c91-9fae-438202364787.png)](https://user-images.githubusercontent.com/92626977/233346508-273c422e-05c3-4c91-9fae-438202364787.png)
+
+* 创建 github 用于备份的私库: [https://github.com/new](https://github.com/new)
+
+[![image](https://user-images.githubusercontent.com/92626977/233345537-c5b9dc27-35c4-407b-8809-b0ef68d9ad55.png)](https://user-images.githubusercontent.com/92626977/233345537-c5b9dc27-35c4-407b-8809-b0ef68d9ad55.png)
+
+## PaaS 部署实例
+
+镜像 `fscarmen/argo-nezha:latest` ， 支持 amd64 和 arm64 架构
+
+用到的变量
+
+
+| 变量名           | 是否必须 | 备注                                                                                         |
+| ---------------- | -------- | -------------------------------------------------------------------------------------------- |
+| GH\_USER         | 是       | github 的用户名，用于面板管理授权                                                            |
+| GH\_CLIENTID     | 是       | 在 github 上申请                                                                             |
+| GH\_CLIENTSECRET | 是       | 在 github 上申请                                                                             |
+| GH\_REPO         | 否       | 在 github 上备份哪吒服务端数据库文件的库                                                     |
+| GH\_EMAIL        | 否       | github 的邮箱，用于备份的 git 推送到远程库                                                   |
+| GH\_PAT          | 否       | github 的 PAT                                                                                |
+| ARGO\_JSON       | 是       | 从[https://fscarmen.cloudflare.now.cc](https://fscarmen.cloudflare.now.cc/) 获取的 Argo Json |
+| DATA\_DOMAIN     | 是       | 客户端与服务端的通信 argo 域名                                                               |
+| WEB\_DOMAIN      | 是       | 面板 argo 域名                                                                               |
+| SSH\_DOMAIN      | 否       | ssh 用的 argo 域名                                                                           |
+| SSH\_PASSWORD    | 否       | ssh 的密码，只有在设置 SSH\_JSON 后才生效，默认值 password                                   |
+
+Koyeb
+
+[![Deploy to Koyeb](https://camo.githubusercontent.com/dbd49fd11e4dea39effabf3572eb66edafb50d32aadb31c7458fe7e42ac93790/68747470733a2f2f7777772e6b6f7965622e636f6d2f7374617469632f696d616765732f6465706c6f792f627574746f6e2e737667)](https://app.koyeb.com/deploy?type=docker&name=nezha&ports=80;http;/&env%5BGH_USER%5D=&env%5BGH_CLIENTID%5D=&env%5BGH_CLIENTSECRET%5D=&env%5BGH_REPO%5D=&env%5BGH_EMAIL%5D=&env%5BGH_PAT%5D=&env%5BARGO_JSON%5D=&env%5BDATA_DOMAIN%5D=&env%5BWEB_DOMAIN%5D=&env%5BSSH_DOMAIN%5D=&env%5BSSH_PASSWORD%5D=&image=docker.io/fscarmen/argo-nezha)
+
+[![image](https://user-images.githubusercontent.com/92626977/231088411-fbac3e6e-a8a6-4661-bcf8-7c777aa8ffeb.png)](https://user-images.githubusercontent.com/92626977/231088411-fbac3e6e-a8a6-4661-bcf8-7c777aa8ffeb.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/231088973-7134aefd-4c80-4559-8e40-17c3be11d27d.png)](https://user-images.githubusercontent.com/92626977/231088973-7134aefd-4c80-4559-8e40-17c3be11d27d.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/233336491-6bb801af-257d-467d-aaf0-6dcb68a531ac.png)](https://user-images.githubusercontent.com/92626977/233336491-6bb801af-257d-467d-aaf0-6dcb68a531ac.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/231092893-c8f017a2-ee0e-4e28-bee3-7343158f0fa7.png)](https://user-images.githubusercontent.com/92626977/231092893-c8f017a2-ee0e-4e28-bee3-7343158f0fa7.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/231094144-df6715bc-c611-47ce-a529-03c43f38102e.png)](https://user-images.githubusercontent.com/92626977/231094144-df6715bc-c611-47ce-a529-03c43f38102e.png)
+
+## VPS 部署实例
+
+* 注意: ARGO\_JSON= 后面需要有单引号，不能去掉
+* 如果 VPS 是 IPv6 only 的，请先安装 WARP IPv4 或者双栈: [https://github.com/fscarmen/warp](https://github.com/fscarmen/warp)
+* 备份目录为当前路径的 dashboard 文件夹
+
+### docker 部署
+
+```
+docker run -dit \
+           --name nezha_dashboard \
+           --restart always \
+           -e GH_USER=<填 github 用户名> \
+           -e GH_EMAIL=<填 github 邮箱> \
+           -e GH_PAT=<填获取的> \
+           -e GH_REPO=<填自定义的> \
+           -e GH_CLIENTID=<填获取的>  \
+           -e GH_CLIENTSECRET=<填获取的> \
+           -e ARGO_JSON='<填获取的>' \
+           -e WEB_DOMAIN=<填自定义的> \
+           -e DATA_DOMAIN=<填自定义的> \
+           -e SSH_DOMAIN=<填自定义的> \
+           -e SSH_PASSWORD=<填自定义的> \
+           fscarmen/argo-nezha
+```
+
+### docker-compose 部署
+
+```
+version: '3.8'
+services:
+    argo-nezha:
+        image: fscarmen/argo-nezha
+        container_name: nezha_dashboard
+        restart: always
+        environment:
+            - GH_USER=<填 github 用户名>
+            - GH_EMAIL=<<填 github 邮箱>
+            - GH_PAT=<填获取的>
+            - GH_REPO=<填自定义的>
+            - GH_CLIENTID=<填获取的>
+            - GH_CLIENTSECRET=<填获取的>
+            - ARGO_JSON='<填获取的>'
+            - WEB_DOMAIN=<填自定义的>
+            - DATA_DOMAIN=<填自定义的>
+            - SSH_DOMAIN=<填自定义的>
+            - SSH_PASSWORD=<填自定义的>
+```
+
+## 客户端接入
+
+通过gRPC传输，无需额外配置。使用面板给到的安装方式，举例
+
+```
+curl -L https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh -o nezha.sh && chmod +x nezha.sh && sudo ./nezha.sh install_agent data.seales.nom.za 443 eAxO9IF519fKFODlW0 --tls
+```
+
+## SSH 接入
+
+* 以 macOS + WindTerm 为例，其他根据使用的 SSH 工具，结合官方官方说明文档: [https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/use\_cases/ssh/#2-connect-as-a-user](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/use_cases/ssh/#2-connect-as-a-user)
+* 官方 cloudflared 下载: [https://github.com/cloudflare/cloudflared/releases](https://github.com/cloudflare/cloudflared/releases)
+* 以下输入命令举例
+
+```
+<file path>/cloudflared access ssh --hostname ssh.seales.nom.za
+```
+
+[![image](https://user-images.githubusercontent.com/92626977/233349393-cec79e11-346e-4a57-8357-8d153d75ee40.png)](https://user-images.githubusercontent.com/92626977/233349393-cec79e11-346e-4a57-8357-8d153d75ee40.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/233350601-73de67f9-19ca-451f-b395-8721abbb3342.png)](https://user-images.githubusercontent.com/92626977/233350601-73de67f9-19ca-451f-b395-8721abbb3342.png)
+
+[![image](https://user-images.githubusercontent.com/92626977/233350802-754624e0-8456-4353-8577-1f5385fb8723.png)](https://user-images.githubusercontent.com/92626977/233350802-754624e0-8456-4353-8577-1f5385fb8723.png)
+
+## 自动还原备份
+
+* 把需要还原的文件名改到 github 备份库里的 `README.md`，定时服务会每分钟检测更新，并把上次同步的文件名记录在本地 `/dbfile` 处以与在线的文件内容作比对
+
+下图为以还原文件名为 `dashboard-2023-04-23-13:08:37.tar.gz` 作示例
+
+[![image](https://user-images.githubusercontent.com/92626977/233822466-c24e94f6-ba8a-47c9-b77d-aa62a56cc929.png)](https://user-images.githubusercontent.com/92626977/233822466-c24e94f6-ba8a-47c9-b77d-aa62a56cc929.png)
+
+## 手动还原备份
+
+* ssh 进入容器后运行，github 备份库里的 tar.gz 文件名，格式: dashboard-2023-04-22-21:42:10.tar.gz
+
+```
+bash /dashboard/restore.sh <文件名>
+```
+
+[![image](https://user-images.githubusercontent.com/92626977/233792709-fb37b79c-c755-4db1-96ec-1039309ff932.png)](https://user-images.githubusercontent.com/92626977/233792709-fb37b79c-c755-4db1-96ec-1039309ff932.png)
+
+## 完美搬家
+
+* 备份原哪吒的 `/dashboard` 文件夹，压缩备份为 `dashboard.tar.gz` 文件
+
+```
+tar czvf dashboard.tar.gz /dashboard
+```
+
+* 下载文件并放入私库，这个私库名要与新哪吒 <GH\_REPO> 完全一致，并把该库的 README.md 的内容编辑为 `dashboard.tar.gz`
+* 部署本项目新哪吒，完整填入变量即可。部署完成后，自动还原脚本会每分钟作检测，发现有新的内容即会自动还原，全程约 3 分钟
+
+## 主体目录文件及说明
+
+```
+.
+|-- dashboard
+|   |-- app                  # 哪吒面板主程序
+|   |-- argo.json            # Argo 隧道 json 文件，记录着使用隧道的信息
+|   |-- argo.yml             # Argo 隧道 yml 文件，用于在一同隧道下，根据不同域名来分流 web, gRPC 和 ssh 协议的作用
+|   |-- backup.sh            # 备份数据脚本
+|   |-- data
+|   |   |-- config.yaml      # 哪吒面板的配置，如 Github OAuth2 / gRPC 域名 / 端口 / 是否启用 TLS 等信息
+|   |   `-- sqlite.db        # SQLite 数据库文件，记录着面板设置的所有 severs 和 cron 等信息
+|   |-- entrypoint.sh        # 主脚本，容器运行后执行
+|   |-- nezha-agent          # 哪吒客户端，用于监控本地 localhost
+|   |-- nezha.csr            # SSL/TLS 证书签名请求
+|   |-- nezha.key            # SSL/TLS 证书的私钥信息
+|   |-- nezha.pem            # SSL/TLS 隐私增强邮件
+|   `-- restore.sh           # 还原备份脚本
+`-- dbfile                   # 记录最新的还原或备份文件名
+```
